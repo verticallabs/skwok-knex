@@ -53,10 +53,11 @@ knex.schema.dropTableIfExists('users')
     new skwok.Chain(
       skwok.Message.Filters.unhandled(), 
       skwok.Message.Filters.hasBody('ping'), 
-      skwok.Message.Actions.respond('pong', sender),
-      skwok.Message.Actions.handled(),
-      skwok.Store.Actions.save(store)
-    )
+      skwok.Message.Actions.respond('pong', sender, store),
+      skwok.Message.Actions.handled()
+    ),
+    skwok.Message.Actions.handled(),
+    skwok.Store.Actions.save(store)
   );
 
 });
