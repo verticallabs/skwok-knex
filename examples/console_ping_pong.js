@@ -8,7 +8,7 @@ var knexConfig = {
     password : 'mysql',
     database : 'skwok_example'
   },
-  debug: true
+  //debug: true
 };
 var knex = require('knex')(knexConfig);
 
