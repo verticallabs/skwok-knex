@@ -99,7 +99,7 @@ KnexStore.prototype._save = function(message) {
 
   var dbObj = self._transform('message', 'to', message);
   return self._saveToTable(dbObj, self.options.tableNames.message)
-    .then(function(message) {
+    .then(function(dbMessage) {
       var objectPromises = _.map(self.options.objects, function(name) {
         var dbObj = self._transform(name, 'to', message, message['_' + name]);
         return self._saveToTable(dbObj, self.options.tableNames[name]);
@@ -112,7 +112,7 @@ KnexStore.prototype._save = function(message) {
             message['_' + name] = obj;
           });
           
-          return message; 
+          return new skwok.Message(message); 
         });
   });
 }
